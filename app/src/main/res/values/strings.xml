@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PDMD_1</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="options">Options</string>
+    <string name="persona1">Pepe</string>
+    <string name="persona2">Fran</string>
+    <string name="persona3">Paco</string>
+    <string name="persona4">Cesar</string>
+    <string name="persona5">Alberto</string>
+    <string name="Todos">Todos</string>
+    <string name="Favoritos">Favoritos</string>
+    <string name="No_Leídos">No leídos</string>
+    <string name="Grupos">Grupos</string>
+</resources>
