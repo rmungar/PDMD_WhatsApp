@@ -45,31 +45,50 @@ import androidx.navigation.NavController
 import com.example.pdmd_1.R
 import com.example.pdmd_1.navigation.AppScreens
 
+/**
+ * Pantalla principal de la aplicación que contiene la estructura general de la interfaz.
+ *
+ * La pantalla principal incluye la cabecera, la lista de chats y el pie de página.
+ * Además, esta pantalla utiliza un `NavController` para navegar entre diferentes pantallas.
+ *
+ * @param navController El controlador de navegación utilizado para gestionar la navegación entre pantallas.
+ */
 @Composable
-
-fun MainScreen(navController: NavController){
+fun MainScreen(navController: NavController) {
     MainBody(navController)
 }
 
+/**
+ * Cuerpo principal de la pantalla que contiene los diferentes componentes.
+ *
+ * La función organiza la interfaz con una cabecera, una lista de chats y un pie de página, dentro de una columna
+ * con un fondo personalizado.
+ *
+ * @param navController El controlador de navegación utilizado para gestionar la navegación entre pantallas.
+ */
 @Composable
-fun MainBody(navController: NavController){
+fun MainBody(navController: NavController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(colorResource(R.color.Fondo))
-    ){
-
+    ) {
         Cabecera()
-
         Lista(navController)
-
         Footer()
-
-
     }
 }
 
-data class Mensaje(val name:String, val msg: String)
+/**
+ * Representa un mensaje en la lista de chats, contiene un nombre y el mensaje asociado.
+ *
+ * @param name El nombre del usuario que envió el mensaje.
+ * @param msg El contenido del mensaje.
+ */
+data class Mensaje(val name: String, val msg: String)
 
+/**
+ * Lista de mensajes predeterminados para mostrar en la interfaz.
+ */
 private val mensajes = listOf(
     Mensaje("Juan", "Hola"),
     Mensaje("Pepe", "Hola"),
@@ -85,16 +104,23 @@ private val mensajes = listOf(
     Mensaje("J.J.", "Hola")
 )
 
+/**
+ * Lista de botones de filtrado que se pueden seleccionar en la interfaz.
+ */
 private val botones = listOf("Todos", "Favoritos", "No Leidos", "Grupos")
 
-
+/**
+ * Cabecera de la pantalla principal que contiene el título de la app y los iconos de opciones.
+ *
+ * Incluye el nombre de la app y botones de cámara, búsqueda y opciones.
+ */
 @Composable
-fun Cabecera(){
+fun Cabecera() {
     Box(modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight(0.07f)
         .background(colorResource(R.color.ColorTituloEscribir))
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -108,21 +134,20 @@ fun Cabecera(){
                 text = stringResource(R.string.whatsapp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
-
             )
-            Spacer(Modifier.width(190.dp) )
+            Spacer(Modifier.width(190.dp))
             Image(
                 painter = painterResource(R.drawable.photo_camera_24dp_ffffff_fill0_wght400_grad0_opsz24),
                 contentDescription = null,
                 modifier = Modifier.size(23.dp)
             )
-            Spacer(Modifier.width(10.dp) )
+            Spacer(Modifier.width(10.dp))
             Icon(
                 imageVector = Icons.Outlined.Search,
                 contentDescription = stringResource(R.string.options),
                 tint = Color.White
             )
-            Spacer(Modifier.width(10.dp) )
+            Spacer(Modifier.width(10.dp))
             Icon(
                 imageVector = Icons.Outlined.MoreVert,
                 contentDescription = stringResource(R.string.options),
@@ -130,10 +155,16 @@ fun Cabecera(){
                 modifier = Modifier.height(24.dp)
             )
         }
-
     }
 }
 
+/**
+ * Lista de chats que incluye los filtros y los mensajes.
+ *
+ * Muestra los botones de filtrado y luego la lista de chats con sus respectivos mensajes.
+ *
+ * @param navController El controlador de navegación utilizado para gestionar la navegación entre pantallas.
+ */
 @Composable
 fun Lista(navController: NavController) {
     Column(
@@ -142,7 +173,6 @@ fun Lista(navController: NavController) {
             .fillMaxWidth()
             .height(695.dp)
             .wrapContentWidth()
-
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         MisBotones()
@@ -151,8 +181,15 @@ fun Lista(navController: NavController) {
     }
 }
 
+/**
+ * Muestra los chats en la interfaz.
+ *
+ * Itera sobre la lista de mensajes para mostrar cada uno en un `Chat` individual, el cual es clickable.
+ *
+ * @param navController El controlador de navegación utilizado para gestionar la navegación entre pantallas.
+ */
 @Composable
-fun MisChats(navController: NavController){
+fun MisChats(navController: NavController) {
     Column(
         Modifier.fillMaxWidth()
             .verticalScroll(rememberScrollState(0))
@@ -163,12 +200,17 @@ fun MisChats(navController: NavController){
     }
 }
 
+/**
+ * Componente para mostrar la información básica de un chat, como el nombre y el mensaje.
+ *
+ * @param mensaje El objeto `Mensaje` que contiene el nombre del usuario y el contenido del mensaje.
+ */
 @Composable
 fun MisTextos(mensaje: Mensaje) {
-    Column (
+    Column(
         modifier = Modifier.fillMaxHeight()
             .width(70.dp)
-    ){
+    ) {
         Text(
             text = mensaje.name,
             color = Color.White,
@@ -183,6 +225,13 @@ fun MisTextos(mensaje: Mensaje) {
     }
 }
 
+/**
+ * Componente para cada chat en la lista. Muestra un icono de usuario, el mensaje y la hora del mensaje.
+ * Al hacer clic en el chat, se navega a la pantalla de chat individual.
+ *
+ * @param mensaje El objeto `Mensaje` que contiene los datos del chat.
+ * @param navController El controlador de navegación utilizado para gestionar la navegación entre pantallas.
+ */
 @Composable
 fun Chat(mensaje: Mensaje, navController: NavController) {
     Row(
@@ -203,14 +252,18 @@ fun Chat(mensaje: Mensaje, navController: NavController) {
         Spacer(modifier = Modifier.width(10.dp))
         MisTextos(mensaje)
         Spacer(Modifier.fillMaxWidth(0.80f))
-        Text(text = "20:20", color = Color.Gray ,modifier = Modifier.align(Alignment.Top))
-
+        Text(text = "20:20", color = Color.Gray, modifier = Modifier.align(Alignment.Top))
     }
     Spacer(modifier = Modifier.height(20.dp))
 }
 
+/**
+ * Componente para los botones de filtrado en la interfaz principal, como "Favoritos", "No Leídos", etc.
+ *
+ * @param texto El texto que se mostrará en el botón de filtrado.
+ */
 @Composable
-fun BotonesFiltrado(texto: String){
+fun BotonesFiltrado(texto: String) {
     Button(
         modifier = Modifier
             .wrapContentSize()
@@ -228,9 +281,11 @@ fun BotonesFiltrado(texto: String){
     Spacer(Modifier.width(5.dp))
 }
 
+/**
+ * Muestra los botones de filtrado de la interfaz principal (como "Todos", "Favoritos").
+ */
 @Composable
-fun MisBotones(){
-
+fun MisBotones() {
     Row(
         modifier = Modifier.horizontalScroll(ScrollState(0))
             .padding(start = 5.dp)
@@ -242,19 +297,22 @@ fun MisBotones(){
     }
 }
 
+/**
+ * Pie de página de la pantalla principal con los botones de navegación (Chats, Estados, Comunidades, Llamadas).
+ */
 @Composable
-fun Footer(){
+fun Footer() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(1f)
             .background(colorResource(R.color.ColorTituloEscribir))
             .padding(top = 1.dp)
-    ){
-        Row (
+    ) {
+        Row(
             modifier = Modifier.fillMaxWidth()
-        ){
-
+        ) {
+            // Cada columna representa un ícono con su nombre correspondiente.
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -271,6 +329,7 @@ fun Footer(){
                 Spacer(modifier = Modifier.height(2.dp))
                 Text("Chats", color = Color.White, fontSize = 16.sp)
             }
+            // Repetir columnas para cada botón de navegación (Estados, Comunidades, Llamadas).
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -319,10 +378,9 @@ fun Footer(){
                 Spacer(modifier = Modifier.height(2.dp))
                 Text("Llamadas", color = Color.White, fontSize = 16.sp)
             }
-
-
         }
     }
 }
+
 
 

@@ -14,7 +14,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PDMD_1Theme {
-
                 AppNavigation()
             }
         }
