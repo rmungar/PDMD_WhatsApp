@@ -11,5 +11,8 @@
     <color name="Fondo">#2B2D30</color>
     <color name="colorLetrasFiltros">#25D266</color>
     <color name="imagenes">#2B2D30</color>
-    <color name="imagenesUsuarios">#4D4C4C</color>
+    <color name="imagenesUsuarios">#6e6d6d</color>
+    <color name="ColorTituloEscribir">#0c0c1a</color>
+    <color name="BotonAudio">#1dad54</color>
+    <color name="ColorMensajes">#17783b</color>
 </resources>
